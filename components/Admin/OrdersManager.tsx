@@ -1,5 +1,20 @@
+import { Prisma } from "@prisma/client";
+type UserWithOrders = Prisma.UserGetPayload<{
+  include: {
+    orders: {
+      include: {
+        items: {
+          include: {
+            product: true;
+          };
+        };
+      };
+    };
+  };
+}>;
+
 type Props = {
-  users: any[];
+  users: UserWithOrders[];
 };
 
 export default function OrderManager({ users }: Props) {
