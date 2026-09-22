@@ -1,6 +1,6 @@
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -24,6 +24,7 @@ model Product {
   images     ProductImage[] // یک محصول می‌تواند چندین عکس داشته باشد
   sizes      ProductSize[] // یک محصول می‌تواند چندین سایز داشته باشد
   orderItems OrderItem[]
+  tags       ProductTag[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -103,4 +104,21 @@ model Payment {
   createdAt DateTime @default(now())
 
   order Order @relation(fields: [orderId], references: [id])
+}
+
+model Tag {
+  id   String @id @default(uuid())
+  name String @unique
+
+  products ProductTag[]
+}
+
+model ProductTag {
+  productId String
+  tagId     String
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  tag     Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([productId, tagId])
 }

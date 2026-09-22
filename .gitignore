@@ -48,3 +48,9 @@ dev.db-journal
 
 # Uploaded files
 /public/uploads/
+
+# Local SQLite migration tools
+prisma/generated/
+prisma/migrate-data.ts
+prisma/migrations_sqlite_backup/
+prisma/schema-sqlite.prisma

@@ -47,6 +47,70 @@ async function main() {
   };
   
   console.log("✅ تمام محصولات با موفقیت وارد دیتابیس شدند!");
+    console.log("🏷️ در حال ساخت تگ‌ها...");
+
+  const tagNames = [
+    "warm",
+    "cool",
+    "geometric",
+    "floral",
+    "minimalist",
+    "living-room",
+    "kitchen",
+  ];
+
+  const tags = [];
+
+  for (const name of tagNames) {
+    const tag = await prisma.tag.upsert({
+      where: { name },
+      update: {},
+      create: { name },
+    });
+
+    tags.push(tag);
+  }
+
+  console.log("✅ تگ‌ها ساخته شدند!");
+
+  // چند محصول موجود را برای تست به تگ‌ها وصل می‌کنیم
+  const products = await prisma.product.findMany({
+    take: 3,
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
+
+  if (products.length >= 3) {
+    const tagConnections = [
+      { product: products[0], tag: tags[0] }, // warm
+      { product: products[0], tag: tags[4] }, // minimalist
+
+      { product: products[1], tag: tags[1] }, // cool
+      { product: products[1], tag: tags[2] }, // geometric
+
+      { product: products[2], tag: tags[5] }, // living-room
+      { product: products[2], tag: tags[3] }, // floral
+    ];
+
+    for (const connection of tagConnections) {
+      await prisma.productTag.upsert({
+        where: {
+          productId_tagId: {
+            productId: connection.product.id,
+            tagId: connection.tag.id,
+          },
+        },
+        update: {},
+        create: {
+          productId: connection.product.id,
+          tagId: connection.tag.id,
+        },
+      });
+    }
+
+    console.log("✅ تگ‌ها به محصولات متصل شدند!");
+  }
 }
 
 main()

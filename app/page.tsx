@@ -8,7 +8,7 @@ import FloatingItem from "@/components/motions/FloatingItem";
 import Input from "@/components/home/Input";
 import Link from "next/link";
 import Gallery from "@/components/home/Gallery";
-
+import Chat from "@/components/ai/chat";
 type HomeProps = {
   searchParams: Promise<{
     search?: string;
@@ -118,7 +118,7 @@ export default async function Home({ searchParams }: HomeProps) {
             </div>
           </div>
         </div>
-
+<Chat />
         {/* Main Slider */}
         <div className="w-full">
           <Slider />
