@@ -3,13 +3,10 @@ import OrderManager from "@/components/Admin/OrdersManager";
 import PictureManager from "@/components/Admin/PictureManager";
 import { prisma } from "@/lib/prisma"; // اصلاح نام ایمپورت
 import { redirect } from "next/navigation";
-import fs from "fs/promises";
-import path from "path";
 import ProductManager from "@/components/Admin/ProductManager";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-
-
+import cloudinary from "@/lib/cloudinary"
 
 
 export default async function AdminPage() {
@@ -37,7 +34,6 @@ if (session.user.role !== "ADMIN") {
 });
 
 const products=await prisma.product.findMany();
-
 async function uploadImage(formData: FormData) {
   "use server";
 
@@ -53,18 +49,27 @@ async function uploadImage(formData: FormData) {
   const buffer = Buffer.from(bytes);
 
 
-  const fileName = `${Date.now()}-${image.name}`;
+  const uploadResult = await new Promise((resolve, reject) => {
+
+    cloudinary.uploader.upload_stream(
+      {
+        folder: "lumina-products",
+      },
+      (error, result) => {
+
+        if(error){
+          reject(error);
+        } else {
+          resolve(result);
+        }
+
+      }
+    ).end(buffer);
+
+  });
 
 
-  const filePath = path.join(
-    process.cwd(),
-    "public",
-    "uploads",
-    fileName
-  );
-
-
-  await fs.writeFile(filePath, buffer);
+  const imageUrl = (uploadResult as any).secure_url;
 
 
   const productId = formData.get("productId") as string;
@@ -72,15 +77,11 @@ async function uploadImage(formData: FormData) {
 
   await prisma.productImage.create({
     data:{
-      url:`/uploads/${fileName}`,
+      url:imageUrl,
       productId
     }
   });
 
-
-
-
-  
 }
 
   async function createProduct(formData: FormData) {

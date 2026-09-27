@@ -15,14 +15,13 @@ export default function ProductCard({ product }: ProductCardProps) {
 
 
  console.log("CARD NAME:", product.name);
-  console.log("CARD SLUG:", product.slug);
-  const firstImage = product.images?.[0];
-
+  console.log("CARD SLUG:", product.slug);  const firstImage = product.images?.[0];
+console.log("CARD IMAGES:", product.images);
 // ۲. بررسی می‌کنیم: اگر خودش متن بود همان را استفاده کن، اگر آبجکت بود .url آن را بردار
-const mainImage = typeof firstImage === 'string' 
-  ? firstImage 
-  : (firstImage as any)?.url || "/images/placeholder.jpg";
-
+const mainImage =
+  product.images?.find((image) =>
+    image.url.startsWith("https://")
+  )?.url || "/images/placeholder.jpg";
  return (
   <Link 
     href={`/product/${product.slug}`} 
