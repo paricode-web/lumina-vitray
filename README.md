@@ -26,7 +26,8 @@ A modern Persian e-commerce application for handmade stained glass artwork, buil
 * **React**
 * **Tailwind CSS**
 * **Prisma ORM**
-* **SQLite** — development database
+* *** PostgreSQL — production database**
+* ***SQLite — local development and migration backup**
 * **NextAuth** — authentication
 * **Zustand** — client-side cart state
 * **bcryptjs** — password hashing
@@ -129,7 +130,7 @@ npm run dev
 Open:
 
 ```text
-http://localhost:3000
+NEXTAUTH_URL=your_nextauth_url_here
 ```
 
 ## 🔑 Environment Variables

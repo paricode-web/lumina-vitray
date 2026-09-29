@@ -15,7 +15,9 @@
 .font-vazirmatn {
   font-family: "Vazirmatn", sans-serif;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 /* ==========================================================
    Lumina Vitray — Glass Palette
    ========================================================== */

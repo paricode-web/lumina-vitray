@@ -122,3 +122,11 @@ model ProductTag {
 
   @@id([productId, tagId])
 }
+
+model Gallery {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  imageUrl    String
+  createdAt   DateTime @default(now())
+}

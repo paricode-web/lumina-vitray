@@ -7,6 +7,8 @@ import ProductManager from "@/components/Admin/ProductManager";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import cloudinary from "@/lib/cloudinary"
+import Link from "next/link";
+
 
 
 export default async function AdminPage() {
@@ -169,7 +171,6 @@ return (
       </div>
 
 
-
       {/* Top Cards */}
       <div className="
         grid 
@@ -194,6 +195,7 @@ return (
           md:p-8
           "
         >
+          
 
           <form action={createProduct} className="space-y-4 md:space-y-5">
 
@@ -295,7 +297,28 @@ return (
 
 
 
-
+<Link
+  href="/admin/gallery"
+  className="
+    inline-flex
+    items-center
+    rounded-2xl
+    bg-sky-600
+    px-6
+    py-3
+    text-sm
+    font-semibold
+    text-white
+    shadow-lg
+    shadow-sky-200
+    transition-all
+    hover:-translate-y-1
+    hover:bg-sky-700
+  
+  "
+>
+  مدیریت گالری
+</Link>
         {/* Orders */}
         <div
           className="

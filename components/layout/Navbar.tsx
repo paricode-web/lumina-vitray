@@ -46,14 +46,14 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden items-center gap-4 text-sm text-neutral-200 lg:gap-6 md:flex">
             <Link
-              href="/shop"
+              href="/#shop"
               className="transition hover:text-primary"
             >
               فروشگاه
             </Link>
 
             <Link
-              href="/gallery"
+              href="/#gallery"
               className="transition hover:text-primary"
             >
               گالری

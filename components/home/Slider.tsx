@@ -71,7 +71,7 @@ export default function Slider() {
         </div>
 
         {/* Image */}
-        <div className="relative order-1 h-[250px] w-full flex-1 sm:h-[270px] md:order-2 md:h-full">
+        <div className="relative order-1 ز w-full flex-1 sm:h-[270px] md:order-2 md:h-full">
           <Image
             src={slideItems[current].image}
             alt={slideItems[current].title}

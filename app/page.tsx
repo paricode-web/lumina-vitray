@@ -9,6 +9,8 @@ import Input from "@/components/home/Input";
 import Link from "next/link";
 import Gallery from "@/components/home/Gallery";
 import Chat from "@/components/ai/chat";
+import AboutPreview from "@/components/home/AboutPreviw";
+
 type HomeProps = {
   searchParams: Promise<{
     search?: string;
@@ -33,7 +35,11 @@ export default async function Home({ searchParams }: HomeProps) {
       createdAt: "desc",
     },
   });
-
+const images = await prisma.gallery.findMany({
+    orderBy:{
+      createdAt:"desc"
+    }
+  });
   return (
     <main
       className="relative min-h-screen overflow-x-hidden bg-bg-base pb-16 text-right"
@@ -118,7 +124,7 @@ export default async function Home({ searchParams }: HomeProps) {
             </div>
           </div>
         </div>
-<Chat />
+
         {/* Main Slider */}
         <div className="w-full">
           <Slider />
@@ -134,7 +140,7 @@ export default async function Home({ searchParams }: HomeProps) {
         </section>
 
         {/* All Products */}
-        <section className="w-full">
+        <section   id="shop"  className="w-full">
           <h2 className="mb-5 mr-1 text-xl font-bold text-neutral-200 sm:mb-6 sm:mr-2 sm:text-2xl">
             همه محصولات فروشگاه
           </h2>
@@ -147,11 +153,49 @@ export default async function Home({ searchParams }: HomeProps) {
               />
             ))}
           </div>
-
-          <div className="mt-10">
-            <Gallery />
-          </div>
+          
+      
+<div className="mt-16 flex justify-center">
+  <Link
+    href="/chatpage"
+    className="
+      group
+      relative
+      inline-flex
+      items-center
+      justify-center
+      rounded-full
+      border
+      border-white/60
+      bg-white/40
+      px-8
+      py-4
+      font-medium
+      text-gray-700
+      shadow-lg
+      shadow-sky-200/40
+      backdrop-blur-xl
+      transition-all
+      duration-500
+      hover:-translate-y-1
+      hover:shadow-xl
+      hover:shadow-sky-300/40
+    "
+  >
+    <span className="relative z-10">
+      محصول مناسب خود را پیدا کنید
+    </span>
+  </Link>
+</div>   
+<div 
+  id="gallery"
+  className="mt-10"
+>
+  <Gallery images={images}/>
+</div>
         </section>
+
+     <AboutPreview />
       </div>
     </main>
   );
