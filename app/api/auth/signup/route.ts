@@ -10,11 +10,17 @@ export async function POST(req: Request) {
 
     if (!name || !email || !password) {
       return NextResponse.json(
-        { message: "همه فیلدها الزامی هستند" },
+        { message: "همه فیلدها الزامی هستند." },
         { status: 400 }
       );
     }
 
+    if (password.length < 6) {
+      return NextResponse.json(
+        { message: "رمز عبور باید حداقل ۶ کاراکتر باشد." },
+        { status: 400 }
+      );
+    }
 
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -22,17 +28,14 @@ export async function POST(req: Request) {
       },
     });
 
-
     if (existingUser) {
       return NextResponse.json(
-        { message: "این ایمیل قبلا ثبت شده" },
+        { message: "این ایمیل قبلاً ثبت شده است." },
         { status: 400 }
       );
     }
 
-
     const hashedPassword = await bcrypt.hash(password, 10);
-
 
     const user = await prisma.user.create({
       data: {
@@ -42,10 +45,9 @@ export async function POST(req: Request) {
       },
     });
 
-
     return NextResponse.json(
       {
-        message: "ثبت نام موفق بود",
+        message: "ثبت نام موفق بود.",
         user: {
           id: user.id,
           email: user.email,
@@ -53,14 +55,12 @@ export async function POST(req: Request) {
       },
       { status: 201 }
     );
-
-
   } catch (error) {
+    console.error("Signup error:", error);
 
     return NextResponse.json(
-      { message: "خطای سرور" },
+      { message: "خطای سرور." },
       { status: 500 }
     );
-
   }
 }
