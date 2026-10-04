@@ -53,4 +53,4 @@ dev.db-journal
 prisma/generated/
 prisma/migrate-data.ts
 prisma/migrations_sqlite_backup/
-prisma/schema-sqlite.prisma
+prisma/schema-sqlite.prismadebug.log
