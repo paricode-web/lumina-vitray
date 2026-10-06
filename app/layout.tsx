@@ -2,21 +2,24 @@ import { Katibeh } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./providers/AuthProvider";
 import type { Metadata } from "next";
-import { Toaster } from "react-hot-toast"
+import { Toaster } from "react-hot-toast";
+
 const katibeh = Katibeh({
   weight: ["400"],
   subsets: ["arabic", "latin"],
   variable: "--font-katibeh",
   display: "swap",
 });
+
 export const metadata: Metadata = {
   title: {
-    default: "Lumina Vitray",
-    template: "%s | Lumina Vitray",
+    default: "Next Starter",
+    template: "%s | Next Starter",
   },
   description:
-    "فروشگاه قاب ویترای دست‌ساز؛ تلالو نور و رنگ روی شیشه‌های هنری.",
+    "A modern, reusable starter for Next.js projects with authentication, Prisma, PostgreSQL, and TypeScript.",
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,12 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${katibeh.variable} bg-bg-base font-vazirmatn min-h-screen`} >
+      <body
+        className={`${katibeh.variable} bg-bg-base font-vazirmatn min-h-screen`}
+      >
         <Toaster position="top-center" />
-        <AuthProvider>
-        {children}
-        </AuthProvider>
+
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
-} 
+}

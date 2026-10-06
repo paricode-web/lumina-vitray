@@ -1,5 +1,5 @@
 {
-  "name": "lumina-vitray",
+  "name": "next-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@prisma/client": "6.19.3",
-    "@prisma/config": "7.8.0",
     "bcryptjs": "^3.0.3",
     "lucide-react": "^1.18.0",
     "next": "16.3.5",

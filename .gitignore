@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -13,11 +11,9 @@
 # testing
 /coverage
 
-# next.js
+# Next.js
 /.next/
 /out/
-
-# production
 /build
 
 # misc
@@ -30,27 +26,19 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# environment variables
 .env*
+!.env.example
 
-# vercel
+# Vercel
 .vercel
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
 
+# Generated Prisma client
 /app/generated/prisma
-
-# Prisma / SQLite
-dev.db
-dev.db-journal
 
 # Uploaded files
 /public/uploads/
-
-# Local SQLite migration tools
-prisma/generated/
-prisma/migrate-data.ts
-prisma/migrations_sqlite_backup/
-prisma/schema-sqlite.prismadebug.log

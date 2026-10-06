@@ -48,7 +48,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-white/70 backdrop-blur-xl border border-white/40 shadow-xl rounded-3xl p-8">
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-primary-ink mb-2">
-            به Lumina خوش آمدید
+           خوش آمدید
           </h1>
 
           <p className="text-sm text-neutral-500">

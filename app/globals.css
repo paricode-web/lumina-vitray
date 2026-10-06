@@ -19,7 +19,7 @@ html {
   scroll-behavior: smooth;
 }
 /* ==========================================================
-   Lumina Vitray — Glass Palette
+   Starter Theme — Glass Palette
    ========================================================== */
 
 @theme {
@@ -40,10 +40,7 @@ html {
   --color-bg-surface: #17171a;
 }
 
-/* ==========================================================
-   کلاس‌های آماده‌ی گلس‌مورفیسم
-   className="glass-primary" یا "glass-accent" و ...
-   ========================================================== */
+
 
 @layer components {
   .glass {
@@ -74,21 +71,3 @@ html {
     border: 1px solid color-mix(in srgb, var(--color-secondary) 25%, transparent);
   }
 }
-
-/* ==========================================================
-   نحوه‌ی استفاده:
-
-   <body className="bg-bg-base font-vazirmatn">
-
-   <button className="bg-primary text-primary-ink hover:bg-primary-light rounded-lg px-5 py-2.5">
-     افزودن به سبد خرید
-   </button>
-
-   <span className="bg-accent text-accent-ink rounded-full px-3 py-1 text-sm">
-     ۲۰٪ تخفیف
-   </span>
-
-   <div className="glass-primary rounded-xl p-5">
-     محتوای کارت
-   </div>
-   ========================================================== */
